@@ -8,6 +8,8 @@ import Tasks from './pages/Tasks'
 import Focus from './pages/Focus'
 import Calendar from './pages/Calendar'
 import Settings from './pages/Settings'
+import Projects from './pages/Projects'
+import ProjectPage from './pages/ProjectPage'
 
 function App() {
 	return (
@@ -21,6 +23,8 @@ function App() {
 					<Route path='/focus' element={<Focus />} />
 					<Route path='/calendar' element={<Calendar />} />
 					<Route path='/settings' element={<Settings />} />
+					<Route path='/projects' element={<Projects />} />
+					<Route path='/projects/:id' element={<ProjectPage />} />
 				</Route>
 			</Routes>
 		</div>

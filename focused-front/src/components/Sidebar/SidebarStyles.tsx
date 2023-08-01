@@ -3,6 +3,7 @@ import * as vars from '../../styles/variables'
 import { Link } from 'react-router-dom'
 
 export const SidebarWrapper = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	max-width: 250px;
@@ -17,15 +18,18 @@ export const SidebarLinks = styled.div`
 export const SidebarLink = styled(Link)<{ isActive?: boolean }>`
 	display: flex;
 	align-items: center;
-	gap: 14px;
-	color: ${({ isActive }) =>
-		isActive ? vars.primaryBrandColor : vars.grayColor};
-	padding: 8px;
+	gap: 12px;
+	padding: 6px 8px;
+	margin-bottom: 6px;
+	font-weight: 500;
 	transition: 0.15s;
 	border-radius: 6px;
+	min-height: 39px;
+
+	color: ${({ isActive }) =>
+		isActive ? vars.primaryBrandColor : vars.grayColor};
 	background-color: ${({ isActive }) =>
 		isActive ? 'rgba(62, 192, 145, 0.16)' : ''};
-	margin-bottom: 8px;
 
 	&:last-of-type {
 		margin-bottom: 0;
@@ -56,4 +60,12 @@ export const SidebarProject = styled(SidebarLink)<{ color?: string }>`
 		border-radius: 100%;
 		background-color: ${({ color }) => (color ? color : '')};
 	}
+`
+
+export const SidebarHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid ${vars.grayLightColor};
+	padding: 10px 0;
 `

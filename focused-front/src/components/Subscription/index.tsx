@@ -29,7 +29,7 @@ const Subscription = () => {
 						/>
 					</svg>
 				</SubscriptionLight>
-				<Heading mb='12px'>Thoughts Time</Heading>
+				<Heading $mb='6px'>Thoughts Time</Heading>
 				<TextParagraph>
 					We don’t have any notice for you, till then you can share your
 					thoughts with your peers.

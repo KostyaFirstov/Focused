@@ -2,13 +2,15 @@ import { styled } from 'styled-components'
 
 export const SubscriptionWrapper = styled.div`
 	padding: 12px;
+	position: absolute;
+	bottom: 0;
 `
 
 export const SubscriptionContent = styled.div`
 	position: relative;
 	background-color: #f5f5f5;
 	border-radius: 16px;
-	padding: 40px 20px 20px;
+	padding: 30px 12px 12px;
 	text-align: center;
 `
 
@@ -18,16 +20,16 @@ export const SubscriptionLight = styled.div`
 	left: 50%;
 	background-color: #f5f5f5;
 	border-radius: 100%;
-	width: 54px;
-	height: 54px;
+	width: 46px;
+	height: 46px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 
 	& svg {
-		width: 32px;
-		height: 32px;
+		width: 26px;
+		height: 26px;
 		position: relative;
 		z-index: 5;
 	}
@@ -35,13 +37,14 @@ export const SubscriptionLight = styled.div`
 	&:after {
 		content: '';
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		filter: blur(17px);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 10px;
+		height: 10px;
 		z-index: -1;
-		box-shadow: 0 0 20px 15px #fbcb18;
+		opacity: 0.5;
+		box-shadow: 0 0 20px 16px #fbcb18;
 	}
 `
 
@@ -49,9 +52,7 @@ export const SubscriptionButton = styled.button`
 	background-color: #fff;
 	border-radius: 6px;
 	padding: 12px 27px;
-	cursor: pointer;
 	width: 100%;
-	margin-top: 12px;
-	border: unset;
+	margin-top: 8px;
 	font-weight: 500;
 `
