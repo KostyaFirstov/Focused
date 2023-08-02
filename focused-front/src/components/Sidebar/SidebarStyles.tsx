@@ -3,12 +3,13 @@ import * as vars from '../../styles/variables'
 import { Link } from 'react-router-dom'
 
 export const SidebarWrapper = styled.div`
-	position: relative;
+	position: sticky;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	max-width: 250px;
 	width: 100%;
-	min-height: 100vh;
+	height: 100vh;
 	border-right: 1px solid ${vars.grayLightColor};
 `
 export const SidebarLinks = styled.div`
@@ -20,11 +21,11 @@ export const SidebarLink = styled(Link)<{ isActive?: boolean }>`
 	align-items: center;
 	gap: 12px;
 	padding: 6px 8px;
-	margin-bottom: 6px;
 	font-weight: 500;
 	transition: 0.15s;
 	border-radius: 6px;
 	min-height: 39px;
+	margin-bottom: 2px;
 
 	color: ${({ isActive }) =>
 		isActive ? vars.primaryBrandColor : vars.grayColor};

@@ -6,15 +6,17 @@ import Header from '../components/Header'
 
 const MainLayout = () => {
 	return (
-		<ContainerFlex>
-			<Sidebar />
-			<ContentWrapper>
-				<Header />
-				<Container>
-					<Outlet />
-				</Container>
-			</ContentWrapper>
-		</ContainerFlex>
+		<>
+			<Header />
+			<ContainerFlex>
+				<Sidebar />
+				<ContentWrapper>
+					<Container>
+						<Outlet />
+					</Container>
+				</ContentWrapper>
+			</ContainerFlex>
+		</>
 	)
 }
 

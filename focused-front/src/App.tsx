@@ -10,6 +10,8 @@ import Calendar from './pages/Calendar'
 import Settings from './pages/Settings'
 import Projects from './pages/Projects'
 import ProjectPage from './pages/ProjectPage'
+import Statistics from './pages/Statistics'
+import Profile from './pages/Profile'
 
 function App() {
 	return (
@@ -23,7 +25,9 @@ function App() {
 					<Route path='/focus' element={<Focus />} />
 					<Route path='/calendar' element={<Calendar />} />
 					<Route path='/settings' element={<Settings />} />
+					<Route path='/profile' element={<Profile />} />
 					<Route path='/projects' element={<Projects />} />
+					<Route path='/statistics' element={<Statistics />} />
 					<Route path='/projects/:id' element={<ProjectPage />} />
 				</Route>
 			</Routes>

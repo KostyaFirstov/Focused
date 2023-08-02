@@ -1,7 +1,13 @@
 import React from 'react'
-import { HeaderOptions, HeaderOption, HeaderWrapper } from './HeaderStyles'
+import {
+	HeaderLeft,
+	HeaderOptions,
+	HeaderOption,
+	HeaderWrapper
+} from './HeaderStyles'
 import Search from '../Search'
 import DropdownAccount from '../DropDownAccount'
+import Logo from '../Logo'
 
 // const options = [
 // 	{
@@ -207,7 +213,10 @@ import DropdownAccount from '../DropDownAccount'
 const Header = () => {
 	return (
 		<HeaderWrapper>
-			<Search />
+			<HeaderLeft>
+				<Logo />
+				<Search />
+			</HeaderLeft>
 			<HeaderOptions>
 				<HeaderOption to={'/'}>
 					<svg

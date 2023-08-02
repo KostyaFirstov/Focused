@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export const AccountWrapper = styled.div`
 	position: relative;
-	margin-left: 10px;
+	margin-left: 4px;
 `
 export const AccountTop = styled.button<{ $active: boolean }>`
 	display: flex;

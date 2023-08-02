@@ -225,7 +225,6 @@ const Sidebar = () => {
 
 	return (
 		<SidebarWrapper>
-			<Logo />
 			<SidebarLinks>
 				{links.map((link, index) => (
 					<SidebarLink

@@ -18,11 +18,16 @@ const GlobalStyle = createGlobalStyle`
   button {
 	background-color: unset;
 	cursor: pointer;
+	text-align: unset;
   }
 
   button, input {
 	  outline: none;
 	  border: none;
+  }
+
+  ul {
+	list-style: none;
   }
 
 

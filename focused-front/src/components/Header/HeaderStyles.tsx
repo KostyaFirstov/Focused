@@ -10,20 +10,29 @@ export const HeaderWrapper = styled(Container)`
 	align-items: center;
 	border-bottom: 1px solid ${vars.grayLightColor};
 	height: 88px;
+	position: sticky;
+	top: 0;
+	background-color: #fff;
+	padding: 0 50px 0 0;
+	z-index: 100;
 `
 
 export const HeaderOptions = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 4px;
+`
+
+export const HeaderLeft = styled(HeaderOptions)`
+	gap: 50px;
 `
 
 export const HeaderOption = styled(Link)<{ $after?: boolean }>`
 	position: relative;
 	padding: 10px;
 	border-radius: 100%;
-	width: 46px;
-	height: 46px;
+	width: 44px;
+	height: 44px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
