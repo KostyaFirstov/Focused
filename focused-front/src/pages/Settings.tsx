@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Settings = () => {
-	return <div>Settings</div>
+	return <MainHeading>Настройки</MainHeading>
 }
 
 export default Settings

@@ -1,6 +1,5 @@
 import React from 'react'
 import { MainHeading } from '../styles/globalStyle'
-import Task from '../components/Task'
 import Sections from '../components/Sections'
 
 const Tasks = () => {

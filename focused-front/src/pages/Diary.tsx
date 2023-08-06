@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Diary = () => {
-	return <div>Diary</div>
+	return <MainHeading>Дневник</MainHeading>
 }
 
 export default Diary

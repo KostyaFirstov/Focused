@@ -56,6 +56,7 @@ export const AccountDropDown = styled.div`
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 	padding: 10px;
+	box-shadow: 0px 10px 20px 0px rgba(77, 76, 83, 0.14);
 `
 export const AccountLinks = styled.ul`
 	display: flex;

@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Projects = () => {
-	return <div>Projects</div>
+	return <MainHeading>Проекты</MainHeading>
 }
 
 export default Projects

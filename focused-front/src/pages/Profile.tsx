@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Profile = () => {
-	return <div>Profile</div>
+	return <MainHeading>Profile</MainHeading>
 }
 
 export default Profile

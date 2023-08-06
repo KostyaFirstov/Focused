@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Calendar = () => {
-	return <div>Calendar</div>
+	return <MainHeading>Календарь</MainHeading>
 }
 
 export default Calendar

@@ -1,7 +1,8 @@
 import React from 'react'
+import { MainHeading } from '../styles/globalStyle'
 
 const Statistics = () => {
-	return <div>Statistics</div>
+	return <MainHeading>Статистика</MainHeading>
 }
 
 export default Statistics

@@ -11,23 +11,15 @@ import {
 	AccountLink,
 	AccountTop
 } from './DropdownAccountStyles'
+import useOutsideClick from '../../hooks/useOutsideClick'
 
 const DropdownAccount = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const dropDownRef = React.useRef<HTMLDivElement>(null)
 
-	React.useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			const _event = event.composedPath()
-
-			if (dropDownRef.current && !_event.includes(dropDownRef.current)) {
-				setIsOpen(false)
-			}
-		}
-
-		document.addEventListener('click', handleClickOutside)
-		return () => document.removeEventListener('click', handleClickOutside)
-	}, [])
+	useOutsideClick([dropDownRef], () => {
+		setIsOpen(false)
+	})
 
 	const handleOpen = () => {
 		setIsOpen(prev => !prev)
