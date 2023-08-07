@@ -14,7 +14,6 @@ import {
 import Task from '../Task'
 import OptionsWindow from '../OptionsWindow'
 import { OptionsItem } from '../OptionsWindow/OptionsWindowStyles'
-import { TaskOptionsOpen } from '../Task/TaskStyles'
 import useOutsideClick from '../../hooks/useOutsideClick'
 
 interface SectionItemProps {

@@ -63,7 +63,12 @@ export const TextParagraph = styled.p`
 `
 
 // CONTROLS
-export const Button = styled.button``
+export const Button = styled.button<{ $color?: string }>`
+	padding: 6px 15px;
+	border-radius: 10px;
+	border: 2px solid ${({ $color }) => ($color ? $color : '#fff')};
+	color: ${({ $color }) => ($color ? $color : '#fff')};
+`
 export const SmallButton = styled.button<{ $bg?: string }>``
 
 export const LinkStyle = styled.a``

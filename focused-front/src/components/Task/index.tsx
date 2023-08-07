@@ -132,7 +132,7 @@ const Task: React.FC<TaskProps> = props => {
 								fill='#4D4C53'
 							/>
 						</svg>
-						12 notes
+						12 заметок
 					</TaskComments>
 				</TaskFooter>
 			</TaskWrapper>
