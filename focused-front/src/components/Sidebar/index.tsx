@@ -4,6 +4,8 @@ import {
 	SidebarLink,
 	SidebarLinks,
 	SidebarProject,
+	SidebarReduced,
+	SidebarReducedBtn,
 	SidebarWrapper
 } from './SidebarStyles'
 import Logo from '../Logo'
@@ -221,28 +223,18 @@ const projects = [
 ]
 
 const Sidebar = () => {
+	const [isReduced, setIsReduced] = React.useState(false)
 	const { pathname } = useLocation()
 
+	const onSetReduced = () => {
+		setIsReduced(prev => !prev)
+	}
+
 	return (
-		<SidebarWrapper>
-			<SidebarLinks>
-				{links.map((link, index) => (
-					<SidebarLink
-						to={link.link}
-						key={index}
-						isActive={pathname === link.link}
-					>
-						<span>{link.icon}</span>
-						{link.name}
-					</SidebarLink>
-				))}
-			</SidebarLinks>
-			<SidebarLinks>
-				<SidebarHeader>
-					<TextSpan>
-						<Link to='/projects'>МОИ ПРОЕКТЫ</Link>
-					</TextSpan>
-					<SmallButton>
+		<SidebarWrapper $isReduced={isReduced}>
+			<SidebarReduced>
+				<SidebarReducedBtn onClick={onSetReduced}>
+					{isReduced ? (
 						<svg
 							width='20'
 							height='20'
@@ -251,65 +243,118 @@ const Sidebar = () => {
 							xmlns='http://www.w3.org/2000/svg'
 						>
 							<path
-								d='M6.66675 10H13.3334'
-								stroke='#4D4C53'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-							<path
-								d='M10 13.3334V6.66675'
-								stroke='#4D4C53'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-							<path
-								d='M7.50008 18.3334H12.5001C16.6667 18.3334 18.3334 16.6667 18.3334 12.5001V7.50008C18.3334 3.33341 16.6667 1.66675 12.5001 1.66675H7.50008C3.33341 1.66675 1.66675 3.33341 1.66675 7.50008V12.5001C1.66675 16.6667 3.33341 18.3334 7.50008 18.3334Z'
-								stroke='#4D4C53'
-								strokeLinecap='round'
-								strokeLinejoin='round'
+								d='M16 16V4H18V16H16ZM5.99998 9L8.50098 6.5L7.00098 5L2.00098 10L7.00098 15L8.50098 13.5L6.00098 11H14.001V9H5.99998Z'
+								fill='#4D4C53'
 							/>
 						</svg>
-					</SmallButton>
-				</SidebarHeader>
-				{projects.length <= 3 ? (
-					projects.map((project, index) => (
-						<SidebarProject
-							to={`/projects/${project.name}`}
-							key={index}
-							isActive={
-								decodeURIComponent(pathname) === `/projects/${project.name}`
-							}
-							color={project.color}
-						>
-							<span></span>
-							{project.name}
-						</SidebarProject>
-					))
-				) : (
-					<div className=''>
-						{projects.map((project, index) => {
-							if (index < 3) {
-								return (
-									<SidebarProject
-										to={`/projects/${project.name}`}
-										key={index}
-										isActive={
-											decodeURIComponent(pathname) ===
-											`/projects/${project.name}`
-										}
-										color={project.color}
-									>
-										<span></span>
-										{project.name}
-									</SidebarProject>
-								)
-							}
-						})}
-						+{projects.length - 3} проект
-					</div>
-				)}
+					) : (
+						<>
+							КАТЕГОРИИ
+							<svg
+								width='20'
+								height='20'
+								viewBox='0 0 20 20'
+								fill='none'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									d='M16 16V4H18V16H16ZM5.99998 9L8.50098 6.5L7.00098 5L2.00098 10L7.00098 15L8.50098 13.5L6.00098 11H14.001V9H5.99998Z'
+									fill='#4D4C53'
+								/>
+							</svg>
+						</>
+					)}
+				</SidebarReducedBtn>
+			</SidebarReduced>
+			<SidebarLinks>
+				{links.map((link, index) => (
+					<SidebarLink
+						to={link.link}
+						key={index}
+						$isActive={pathname === link.link}
+					>
+						<span>{link.icon}</span>
+						{isReduced ? '' : link.name}
+					</SidebarLink>
+				))}
 			</SidebarLinks>
-			<Subscription />
+			{isReduced ? (
+				''
+			) : (
+				<SidebarLinks>
+					<SidebarHeader>
+						<TextSpan>
+							<Link to='/projects'>МОИ ПРОЕКТЫ</Link>
+						</TextSpan>
+						<SmallButton>
+							<svg
+								width='20'
+								height='20'
+								viewBox='0 0 20 20'
+								fill='none'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									d='M6.66675 10H13.3334'
+									stroke='#4D4C53'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+								<path
+									d='M10 13.3334V6.66675'
+									stroke='#4D4C53'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+								<path
+									d='M7.50008 18.3334H12.5001C16.6667 18.3334 18.3334 16.6667 18.3334 12.5001V7.50008C18.3334 3.33341 16.6667 1.66675 12.5001 1.66675H7.50008C3.33341 1.66675 1.66675 3.33341 1.66675 7.50008V12.5001C1.66675 16.6667 3.33341 18.3334 7.50008 18.3334Z'
+									stroke='#4D4C53'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+							</svg>
+						</SmallButton>
+					</SidebarHeader>
+					{projects.length <= 3 ? (
+						projects.map((project, index) => (
+							<SidebarProject
+								to={`/projects/${project.name}`}
+								key={index}
+								$isActive={
+									decodeURIComponent(pathname) === `/projects/${project.name}`
+								}
+								color={project.color}
+							>
+								<span></span>
+								{project.name}
+							</SidebarProject>
+						))
+					) : (
+						<div className=''>
+							{projects.map((project, index) => {
+								if (index < 3) {
+									return (
+										<SidebarProject
+											to={`/projects/${project.name}`}
+											key={index}
+											$isActive={
+												decodeURIComponent(pathname) ===
+												`/projects/${project.name}`
+											}
+											color={project.color}
+										>
+											<span></span>
+											{project.name}
+										</SidebarProject>
+									)
+								}
+							})}
+							+{projects.length - 3} проект
+						</div>
+					)}
+				</SidebarLinks>
+			)}
+			{isReduced ? '' : <Subscription />}
 		</SidebarWrapper>
 	)
 }

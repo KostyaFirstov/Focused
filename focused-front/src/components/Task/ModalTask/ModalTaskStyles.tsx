@@ -1,18 +1,49 @@
 import styled from 'styled-components'
 import * as vars from '../../../styles/variables'
-import { TaskImage } from '../TaskStyles'
 
-export const ModalTaskWrapper = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1000;
-	background-color: rgba(0, 0, 0, 0.65);
+export const ModalTaskOption = styled.button`
+	width: 38px;
+	height: 38px;
+	border-radius: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: ${vars.grayLightColor};
+	}
+`
+export const ModalInputDesc = styled.textarea`
+	background-color: #f5f5f5;
+	border-radius: 6px;
+	padding: 10px 10px 12px;
+	border: 1px solid #f5f5f5;
+	width: 100%;
+	transition: 0.15s;
+	overflow: hidden;
+	resize: vertical;
+`
+
+export const ModalTaskHeader = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 6px;
+`
+export const ModalTaskOptions = styled(ModalTaskHeader)`
+	gap: 4px;
+`
+export const ModalTaskComplete = styled.button<{ $active: boolean }>`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	font-size: ${vars.fontSizeMedium};
+	color: ${({ $active }) => ($active ? vars.primaryBrandColor : '')};
+
+	& path {
+		fill: ${({ $active }) => ($active ? vars.primaryBrandColor : '')};
+	}
 `
 
 export const ModalTaskContainer = styled.div`
@@ -22,7 +53,6 @@ export const ModalTaskContainer = styled.div`
 	max-width: 700px;
 	width: 100%;
 `
-
 export const ModalProjectAdd = styled.button`
 	display: flex;
 	align-items: center;
@@ -79,6 +109,5 @@ export const ModalTaskImages = styled.div`
 	grid-template-columns: repeat(5, 1fr);
 	grid-gap: 10px;
 `
-
 export const ModalNotes = styled.ul``
 export const ModalNote = styled.ul``

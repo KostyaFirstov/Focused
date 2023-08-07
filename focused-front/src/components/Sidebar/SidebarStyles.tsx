@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import * as vars from '../../styles/variables'
 import { Link } from 'react-router-dom'
 
-export const SidebarWrapper = styled.div`
+export const SidebarWrapper = styled.div<{ $isReduced: boolean }>`
 	position: sticky;
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	max-width: 250px;
+	max-width: ${({ $isReduced }) => ($isReduced ? '66px' : '250px')};
 	width: 100%;
 	height: 100vh;
 	border-right: 1px solid ${vars.grayLightColor};
@@ -16,7 +16,7 @@ export const SidebarLinks = styled.div`
 	padding: 12px;
 `
 
-export const SidebarLink = styled(Link)<{ isActive?: boolean }>`
+export const SidebarLink = styled(Link)<{ $isActive?: boolean }>`
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -27,10 +27,10 @@ export const SidebarLink = styled(Link)<{ isActive?: boolean }>`
 	min-height: 39px;
 	margin-bottom: 2px;
 
-	color: ${({ isActive }) =>
-		isActive ? vars.primaryBrandColor : vars.grayColor};
-	background-color: ${({ isActive }) =>
-		isActive ? 'rgba(62, 192, 145, 0.16)' : ''};
+	color: ${({ $isActive }) =>
+		$isActive ? vars.primaryBrandColor : vars.grayColor};
+	background-color: ${({ $isActive }) =>
+		$isActive ? 'rgba(62, 192, 145, 0.16)' : ''};
 
 	&:last-of-type {
 		margin-bottom: 0;
@@ -41,7 +41,7 @@ export const SidebarLink = styled(Link)<{ isActive?: boolean }>`
 	}
 
 	& path {
-		stroke: ${({ isActive }) => (isActive ? vars.primaryBrandColor : '')};
+		stroke: ${({ $isActive }) => ($isActive ? vars.primaryBrandColor : '')};
 	}
 
 	& span {
@@ -61,6 +61,18 @@ export const SidebarProject = styled(SidebarLink)<{ color?: string }>`
 		border-radius: 100%;
 		background-color: ${({ color }) => (color ? color : '')};
 	}
+`
+export const SidebarReduced = styled.div`
+	padding: 10px 12px;
+`
+export const SidebarReducedBtn = styled.button`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	min-height: 39px;
+	background-color ${vars.primaryBrandColor};
 `
 
 export const SidebarHeader = styled.div`

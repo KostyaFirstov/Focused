@@ -96,22 +96,22 @@ const SectionItem: React.FC<SectionItemProps> = ({ name, tasks, color }) => {
 					priority='High'
 					title='Brainstorming'
 					desc='Brainstorming brings team members` diverse experience into play.'
-					deadline='06 Aug'
+					deadline='06 Aug 17:00'
 				/>
 				<Task
 					section='In Progress'
 					priority='Low'
 					title='Onboarding Illustrations '
 					desc='Brainstorming brings team members` diverse experience into play.'
-					deadline='07 Aug'
+					deadline='07 Aug 17:00'
 				/>
 				<Task
 					section='Done'
 					priority='Done'
 					title='Mobile App Design'
-					image='/img/task.jpg'
+					images={['/img/task.jpg']}
 					desc='Brainstorming brings team members` diverse experience into play.'
-					deadline='08 Aug'
+					deadline='08 Aug 17:00'
 				/>
 			</SectionTasks>
 		</SectionColumn>

@@ -21,11 +21,11 @@ export interface TaskProps {
 	title: string
 	desc: string
 	priority: string
-	image?: string
+	images?: string[]
 	project?: any
 	section: string
 	deadline: string
-	date?: string
+	notes?: string[]
 }
 
 const Task: React.FC<TaskProps> = props => {
@@ -35,7 +35,7 @@ const Task: React.FC<TaskProps> = props => {
 	const openModalRef = React.useRef(null)
 	const modalRef = React.useRef(null)
 
-	const { desc, priority, title, image, deadline } = props
+	const { desc, priority, title, images, deadline } = props
 
 	useOutsideClick([optionsRef], () => {
 		setOptions(false)
@@ -89,7 +89,7 @@ const Task: React.FC<TaskProps> = props => {
 				<TaskMain ref={openModalRef} onClick={onSetModal}>
 					<Heading $mb='4px'>{title}</Heading>
 					<TextParagraph>{desc}</TextParagraph>
-					{image && <TaskImage src={image} alt={title} />}
+					{images && <TaskImage src={images[0]} alt={title} />}
 				</TaskMain>
 				<TaskFooter>
 					<TaskDeadline>
@@ -136,7 +136,9 @@ const Task: React.FC<TaskProps> = props => {
 					</TaskComments>
 				</TaskFooter>
 			</TaskWrapper>
-			{modal && <ModalTask modalRef={modalRef} {...props} />}
+			{modal && (
+				<ModalTask modalRef={modalRef} {...props} onSetModal={onSetModal} />
+			)}
 		</>
 	)
 }

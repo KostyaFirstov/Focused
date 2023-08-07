@@ -34,10 +34,17 @@ const GlobalStyle = createGlobalStyle`
 `
 
 // TEXT
-export const MainHeading = styled.h1`
+export const MainHeading = styled.h1<{ $mb?: string }>`
 	font-size: ${vars.fontSizeBig};
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
+	margin-bottom: ${({ $mb }) => ($mb ? $mb : '')};
+
+	& input {
+		font-size: ${vars.fontSizeBig};
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 600;
+	}
 `
 export const Heading = styled.h2<{ $mb?: string }>`
 	font-size: ${vars.fontSizeNormal};
