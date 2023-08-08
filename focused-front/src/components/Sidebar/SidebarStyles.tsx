@@ -13,7 +13,7 @@ export const SidebarWrapper = styled.div<{ $isReduced: boolean }>`
 	border-right: 1px solid ${vars.grayLightColor};
 `
 export const SidebarLinks = styled.div`
-	padding: 12px;
+	padding: 0 12px 12px;
 `
 
 export const SidebarLink = styled(Link)<{ $isActive?: boolean }>`
@@ -63,16 +63,33 @@ export const SidebarProject = styled(SidebarLink)<{ color?: string }>`
 	}
 `
 export const SidebarReduced = styled.div`
-	padding: 10px 12px;
+	padding: 12px 12px 0;
+	margin-bottom: 3px;
 `
-export const SidebarReducedBtn = styled.button`
+export const SidebarReducedBtn = styled.button<{ $isReduced: boolean }>`
 	display: flex;
-	justify-content: space-between;
+	justify-content: ${({ $isReduced }) =>
+		$isReduced ? 'center' : 'space-between'};
 	align-items: center;
 	gap: 6px;
 	width: 100%;
 	min-height: 39px;
-	background-color ${vars.primaryBrandColor};
+	transition: 0.15s;
+	border-radius: 6px;
+	padding: 6px 8px;
+
+	& svg {
+		transform: ${({ $isReduced }) =>
+			$isReduced ? 'rotate(180deg)' : 'rotate(0)'};
+	}
+
+	& path {
+		fill: ${({ $isReduced }) => ($isReduced ? vars.primaryBrandColor : '')};
+	}
+
+	&:hover {
+		background-color: ${vars.greenLightColor};
+	}
 `
 
 export const SidebarHeader = styled.div`

@@ -5,11 +5,25 @@ import { TasksAdd, TasksHeader, TasksOptions } from './TasksStyles'
 import { grayColor, primaryBrandColor } from '../../styles/variables'
 import useOutsideClick from '../../hooks/useOutsideClick'
 import CreateTask from '../../components/Task/CreateTask'
+import { useAppDispatch } from '../../redux/store'
+import { useSelector } from 'react-redux'
+import { fetchTasks, selectTasks } from '../../redux/slices/tasksSlice'
+import { selectAccount } from '../../redux/slices/authSlice'
 
 const Tasks = () => {
 	const [modal, setModal] = React.useState(false)
 	const openModalRef = React.useRef(null)
 	const modalRef = React.useRef(null)
+
+	const appDispatch = useAppDispatch()
+	const tasks = useSelector(selectTasks)
+	const data = useSelector(selectAccount)
+
+	console.log(data)
+
+	React.useEffect(() => {
+		if (data) appDispatch(fetchTasks(data._id))
+	}, [])
 
 	useOutsideClick([openModalRef, modalRef], () => {
 		setModal(false)

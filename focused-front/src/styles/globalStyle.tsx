@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import * as vars from './variables'
+import { FieldError } from 'react-hook-form'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -93,17 +94,27 @@ export const ContentWrapper = styled.div`
 
 // INPUTS
 
-export const Input = styled.input`
+export const Input = styled.input<{ $error?: FieldError | undefined }>`
 	background-color: ${vars.grayLightColor};
 	border-radius: 6px;
 	padding: 10px 10px 12px;
-	border: 1px solid ${vars.grayLightColor};
+	border: 1px solid
+		${({ $error }) => ($error ? vars.redColor : vars.grayLightColor)};
 	transition: 0.15s;
 	overflow: hidden;
 
 	&:focus {
 		border: 1px solid ${vars.primaryBrandColor};
 	}
+`
+
+// ERROR
+
+export const Error = styled.div`
+	display: inline-block;
+	color: ${vars.redColor};
+	border-radius: 6px;
+	margin: 4px 0 4px;
 `
 
 export default GlobalStyle

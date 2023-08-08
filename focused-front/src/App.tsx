@@ -12,6 +12,9 @@ import Projects from './pages/Projects'
 import ProjectPage from './pages/ProjectPage'
 import Statistics from './pages/Statistics'
 import Profile from './pages/Profile'
+import Login from './pages/Auth/Login'
+import Register from './pages/Auth/Register'
+import JoinLayout from './layouts/JoinLayout'
 
 function App() {
 	return (
@@ -29,6 +32,10 @@ function App() {
 					<Route path='/projects' element={<Projects />} />
 					<Route path='/statistics' element={<Statistics />} />
 					<Route path='/projects/:id' element={<ProjectPage />} />
+				</Route>
+				<Route path='/' element={<JoinLayout />}>
+					<Route path='/login' element={<Login />} />
+					<Route path='/register' element={<Register />} />
 				</Route>
 			</Routes>
 		</div>

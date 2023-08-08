@@ -1,4 +1,5 @@
 import React from 'react'
+import dateFormat from 'dateformat'
 import {
 	AccountWrapper,
 	AccountImage,
@@ -9,13 +10,19 @@ import {
 	AccountDropDown,
 	AccountLinks,
 	AccountLink,
-	AccountTop
+	AccountTop,
+	AccountBtn
 } from './DropdownAccountStyles'
 import useOutsideClick from '../../hooks/useOutsideClick'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectAccount } from '../../redux/slices/authSlice'
 
 const DropdownAccount = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const dropDownRef = React.useRef<HTMLDivElement>(null)
+	const accountData = useSelector(selectAccount)
+	const dispatch = useDispatch()
+	const date = dateFormat(new Date(), 'd mmm yyyy')
 
 	useOutsideClick([dropDownRef], () => {
 		setIsOpen(false)
@@ -25,12 +32,16 @@ const DropdownAccount = () => {
 		setIsOpen(prev => !prev)
 	}
 
+	const handleLogout = () => {
+		dispatch(logout())
+	}
+
 	return (
 		<AccountWrapper ref={dropDownRef}>
 			<AccountTop onClick={handleOpen} $active={isOpen ? true : false}>
 				<AccountInfo>
-					<AccountName>Anima Agrawal</AccountName>
-					<AccountPlace>Moscow, Russia</AccountPlace>
+					<AccountName>{accountData?.username}</AccountName>
+					<AccountPlace>{date}</AccountPlace>
 				</AccountInfo>
 				<AccountImage src='/img/user.jpg' alt='Avatar' />
 				<AccountThumbler $active={isOpen ? true : false}>
@@ -54,7 +65,7 @@ const DropdownAccount = () => {
 						<AccountLink to='/profile'>Мой профиль</AccountLink>
 						<AccountLink to='/statistics'>Статистика</AccountLink>
 						<AccountLink to='/settings'>Настройки</AccountLink>
-						<AccountLink to='/logout'>Выйти</AccountLink>
+						<AccountBtn onClick={handleLogout}>Выйти</AccountBtn>
 					</AccountLinks>
 				</AccountDropDown>
 			)}

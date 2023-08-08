@@ -233,7 +233,7 @@ const Sidebar = () => {
 	return (
 		<SidebarWrapper $isReduced={isReduced}>
 			<SidebarReduced>
-				<SidebarReducedBtn onClick={onSetReduced}>
+				<SidebarReducedBtn $isReduced={isReduced} onClick={onSetReduced}>
 					{isReduced ? (
 						<svg
 							width='20'
@@ -277,10 +277,33 @@ const Sidebar = () => {
 						{isReduced ? '' : link.name}
 					</SidebarLink>
 				))}
+				{isReduced && (
+					<SidebarProject to='/projects/' $isActive={pathname === `/projects/`}>
+						<svg
+							width='24'
+							height='24'
+							viewBox='0 0 24 24'
+							fill='none'
+							xmlns='http://www.w3.org/2000/svg'
+						>
+							<path
+								d='M18.6 3H5.4C5.08483 3 4.77274 3.06208 4.48156 3.18269C4.19038 3.3033 3.9258 3.48008 3.70294 3.70294C3.48008 3.9258 3.3033 4.19038 3.18269 4.48156C3.06208 4.77274 3 5.08483 3 5.4V18.6C3 19.2365 3.25286 19.847 3.70294 20.2971C4.15303 20.7471 4.76348 21 5.4 21H18.6C19.2365 21 19.847 20.7471 20.2971 20.2971C20.7471 19.847 21 19.2365 21 18.6V5.4C21 4.76348 20.7471 4.15303 20.2971 3.70294C19.847 3.25286 19.2365 3 18.6 3Z'
+								stroke='#4D4C53'
+								strokeWidth='1.5'
+								strokeMiterlimit='10'
+							/>
+							<path
+								d='M12 12V6M7 14V6M17 16V6'
+								stroke='#4D4C53'
+								strokeWidth='1.5'
+								strokeMiterlimit='10'
+								strokeLinecap='round'
+							/>
+						</svg>
+					</SidebarProject>
+				)}
 			</SidebarLinks>
-			{isReduced ? (
-				''
-			) : (
+			{!isReduced && (
 				<SidebarLinks>
 					<SidebarHeader>
 						<TextSpan>

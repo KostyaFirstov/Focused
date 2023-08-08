@@ -63,6 +63,20 @@ export const AccountLinks = styled.ul`
 	flex-direction: column;
 	align-items: flex-start;
 `
+
+export const AccountBtn = styled.button`
+	text-align: left;
+	width: 100%;
+	padding: 10px;
+	font-weight: 500;
+	border-radius: 6px;
+
+	&:hover {
+		color: #fff;
+		background-color: ${vars.primaryBrandColor};
+	}
+`
+
 export const AccountLink = styled(Link)`
 	text-align: left;
 	width: 100%;
