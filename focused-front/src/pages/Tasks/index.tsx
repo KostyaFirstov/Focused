@@ -1,28 +1,36 @@
 import React from 'react'
+import axios from '../../axios'
+import { useDispatch } from 'react-redux'
 import { MainHeading } from '../../styles/globalStyle'
-import Sections from '../../components/Sections'
+import Sections, { SectionItemsProps } from '../../components/Sections'
 import { TasksAdd, TasksHeader, TasksOptions } from './TasksStyles'
 import { grayColor, primaryBrandColor } from '../../styles/variables'
 import useOutsideClick from '../../hooks/useOutsideClick'
 import CreateTask from '../../components/Task/CreateTask'
 import { useAppDispatch } from '../../redux/store'
 import { useSelector } from 'react-redux'
-import { fetchTasks, selectTasks } from '../../redux/slices/tasksSlice'
+import {
+	fetchSections,
+	selectSections,
+	setColumns
+} from '../../redux/slices/tasksSlice'
 import { selectAccount } from '../../redux/slices/authSlice'
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 const Tasks = () => {
 	const [modal, setModal] = React.useState(false)
 	const openModalRef = React.useRef(null)
 	const modalRef = React.useRef(null)
 
+	const dispatch = useDispatch()
 	const appDispatch = useAppDispatch()
-	const tasks = useSelector(selectTasks)
+	const sections = useSelector(selectSections)
 	const data = useSelector(selectAccount)
 
-	console.log(data)
-
 	React.useEffect(() => {
-		if (data) appDispatch(fetchTasks(data._id))
+		if (data) {
+			appDispatch(fetchSections({ id: data._id, project: 'personal' }))
+		}
 	}, [])
 
 	useOutsideClick([openModalRef, modalRef], () => {
@@ -33,8 +41,102 @@ const Tasks = () => {
 		setModal(prev => !prev)
 	}
 
+	const onDragEnd = (result: DropResult) => {
+		const { source, destination, type } = result
+
+		if (!destination) return
+		if (
+			destination.droppableId === source.droppableId &&
+			destination.index === source.index
+		)
+			return
+
+		if (type === 'group') {
+			const reorderedStores = [...sections[0].sections]
+			const sourceIndex = source.index
+			const destinationIndex = destination.index
+
+			const [removedStore] = reorderedStores.splice(sourceIndex, 1)
+			reorderedStores.splice(destinationIndex, 0, removedStore)
+
+			const resultSection = { ...sections[0], sections: reorderedStores }
+
+			return dispatch(setColumns([resultSection]))
+		} else if (source.droppableId !== destination.droppableId) {
+			const sourceSection = sections[0].sections.find(
+				section => section._id === source.droppableId
+			)
+			const sourceIndexSection = sections[0].sections.findIndex(
+				section => section._id === source.droppableId
+			)
+
+			const destSection = sections[0].sections.find(
+				section => section._id === destination.droppableId
+			)
+			const destIndexSection = sections[0].sections.findIndex(
+				section => section._id === destination.droppableId
+			)
+
+			const sourceItems = sourceSection ? [...sourceSection?.items] : []
+			const destItems = destSection ? [...destSection?.items] : []
+
+			const [removed] = sourceItems?.splice(source.index, 1)
+			destItems.splice(destination.index, 0, removed)
+
+			const resultSection = {
+				[sourceIndexSection]: {
+					...sourceSection,
+					items: sourceItems
+				},
+				[destIndexSection]: {
+					...destSection,
+					items: destItems
+				}
+			}
+
+			const res = Object.keys(resultSection).map(
+				(key: any) => resultSection[key]
+			)
+
+			dispatch(setColumns([{ ...sections[0], sections: res }]))
+		} else {
+			const sectionSourceIndex = sections[0].sections.findIndex(
+				section => section._id === source.droppableId
+			)
+			const sectionDestinationIndex = sections[0].sections.findIndex(
+				section => section._id === destination.droppableId
+			)
+			const newSourceItems = [...sections[0].sections[sectionSourceIndex].items]
+
+			const newDestinationItems =
+				source.droppableId !== destination.droppableId
+					? [...sections[0].sections[sectionDestinationIndex].items]
+					: newSourceItems
+
+			const [deletedItem] = newSourceItems.splice(source.index, 1)
+			newDestinationItems.splice(destination.index, 0, deletedItem)
+
+			const newStores = [...sections[0].sections]
+
+			newStores[sectionSourceIndex] = {
+				...sections[0].sections[sectionSourceIndex],
+				items: newSourceItems
+			}
+
+			newStores[sectionDestinationIndex] = {
+				...sections[0].sections[sectionDestinationIndex],
+				items: newSourceItems
+			}
+
+			const result = { ...sections[0], sections: newStores }
+			dispatch(setColumns([result]))
+		}
+
+		const updateSections = async () => {}
+	}
+
 	return (
-		<>
+		<DragDropContext onDragEnd={onDragEnd}>
 			<TasksHeader>
 				<MainHeading>Ваши задачи, Anima</MainHeading>
 				<TasksOptions>
@@ -86,7 +188,7 @@ const Tasks = () => {
 			</TasksHeader>
 			<Sections />
 			{modal && <CreateTask modalRef={modalRef} onSetModal={onSetModal} />}
-		</>
+		</DragDropContext>
 	)
 }
 

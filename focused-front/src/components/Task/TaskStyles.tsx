@@ -9,6 +9,7 @@ export const TaskWrapper = styled.div`
 	background-color: #fff;
 	box-shadow: 0px 3px 14px 4px rgba(77, 76, 83, 0.05);
 	user-select: none;
+	margin: 8px 0;
 `
 export const TaskImage = styled.img`
 	margin-top: 10px;

@@ -23,10 +23,8 @@ export const SectionsWrapper = styled.div`
 `
 
 export const SectionColumn = styled(TaskWrapper)<{ $color: string }>`
-	cursor: unset;
 	background-color: ${vars.grayLightColor};
 	max-width: unset;
-	min-height: 100vh;
 	box-shadow: unset;
 
 	${SectionName} {
@@ -69,7 +67,6 @@ export const SectionOptions = styled.div`
 
 export const SectionTasks = styled.div`
 	display: grid;
-	grid-gap: 16px;
 `
 
 export const SectionAmount = styled(TextSpan)`

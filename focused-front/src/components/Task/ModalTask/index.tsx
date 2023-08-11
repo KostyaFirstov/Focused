@@ -311,7 +311,7 @@ const ModalTask: React.FC<ModalTaskProps> = ({
 						<ModalTaskParameter>
 							<ModalTaskParameterName>Дедлайн</ModalTaskParameterName>
 							{!isChangeMode ? (
-								'08 August 17:00'
+								<>{deadline}</>
 							) : (
 								<Input
 									className={errors.deadline && 'error'}

@@ -1,56 +1,67 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { TaskProps } from '../../components/Task'
 import axios from '../../axios'
 import { LoadingProperty } from './authSlice'
 import { RootState } from '../store'
+import { SectionItemsProps } from '../../components/Sections'
 
-export const fetchTasks = createAsyncThunk(
-	'auth/fetchTasks',
-	async (id: number) => {
-		const { data } = await axios.get<TaskProps[]>(`/tasks/${id}`)
+type FetchTaks = {
+	id: number
+	project: string
+}
+
+export const fetchSections = createAsyncThunk(
+	'auth/fetchSections',
+	async (info: FetchTaks) => {
+		const { data } = await axios.get<SectionItemsProps[]>(
+			`/sections?user=${info.id}&project=${info.project}`
+		)
 		return data
 	}
 )
 
 export interface TasksState {
-	items: TaskProps[]
+	sections: SectionItemsProps[]
 	status: LoadingProperty
 }
 
 const initialState: TasksState = {
-	items: [],
+	sections: [],
 	status: LoadingProperty.STATUS_LOADING
 }
 
 export const tasksSlice = createSlice({
 	name: 'tasks',
 	initialState,
-	reducers: {},
+	reducers: {
+		setColumns: (state, action) => {
+			state.sections = action.payload
+		}
+	},
 	extraReducers: builder => {
-		// FETCH TASKS
+		// FECTCH SECTIONS
 
-		builder.addCase(fetchTasks.pending, state => {
+		builder.addCase(fetchSections.pending, state => {
 			state.status = LoadingProperty.STATUS_LOADING
-			state.items = []
+			state.sections = []
 		})
 
 		builder.addCase(
-			fetchTasks.fulfilled,
-			(state, action: PayloadAction<TaskProps[]>) => {
+			fetchSections.fulfilled,
+			(state, action: PayloadAction<SectionItemsProps[]>) => {
 				state.status = LoadingProperty.STATUS_LOADED
-				state.items = action.payload
+				state.sections = action.payload
 			}
 		)
 
-		builder.addCase(fetchTasks.rejected, state => {
+		builder.addCase(fetchSections.rejected, state => {
 			state.status = LoadingProperty.STATUS_ERROR
-			state.items = []
+			state.sections = []
 		})
 	}
 })
 
-export const selectTasks = (state: RootState) => state.tasks.items
+export const selectSections = (state: RootState) => state.tasks.sections
 
-export const {} = tasksSlice.actions
+export const { setColumns } = tasksSlice.actions
 export default tasksSlice.reducer
